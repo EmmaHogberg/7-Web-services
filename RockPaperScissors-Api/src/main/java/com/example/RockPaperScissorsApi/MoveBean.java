@@ -2,14 +2,9 @@ package com.example.RockPaperScissorsApi;
 
 public class MoveBean {
 
-    private String firstPlayerMove;
-    private String secondPlayerMove;
+    private final String firstPlayerMove;
+    private final String secondPlayerMove;
 
-
-    public MoveBean() {
-        this.firstPlayerMove = "";
-        this.secondPlayerMove = "";
-    }
 
     public MoveBean(String firstPlayerMove, String secondPlayerMove) {
         this.firstPlayerMove = firstPlayerMove;
@@ -20,15 +15,8 @@ public class MoveBean {
         return firstPlayerMove;
     }
 
-    public void setFirstPlayerMove(String firstPlayerMove) {
-        this.firstPlayerMove = firstPlayerMove;
-    }
-
     public String getSecondPlayerMove() {
         return secondPlayerMove;
     }
 
-    public void setSecondPlayerMove(String secondPlayerMove) {
-        this.secondPlayerMove = secondPlayerMove;
-    }
 }

@@ -2,8 +2,8 @@ package com.example.RockPaperScissorsApi;
 
 public class PlayerBean {
 
-    private String firstPlayer;
-    private String secondPlayer;
+    private final String firstPlayer;
+    private final String secondPlayer;
 
 
     public PlayerBean(String firstPlayer, String secondPlayer) {
@@ -15,15 +15,7 @@ public class PlayerBean {
         return firstPlayer;
     }
 
-    public void setFirstPlayer(String firstPlayer) {
-        this.firstPlayer = firstPlayer;
-    }
-
     public String getSecondPlayer() {
         return secondPlayer;
-    }
-
-    public void setSecondPlayer(String secondPlayer) {
-        this.secondPlayer = secondPlayer;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.RockPaperScissorsApi;
 
 
-public class PlayOperator {
+public class GameOperator {
 
     // Method for returning who won the game
     public static void setGameScore(MoveBean moveBean, ScoreBean scoreBean, PlayerBean playerBean) {
@@ -18,8 +18,6 @@ public class PlayOperator {
         int round = scoreBean.getRound();
         round++;
         scoreBean.setRound(round);
-
-
 
 
         // Analyze the result of the players' moves
@@ -95,6 +93,8 @@ public class PlayOperator {
                 break;
         }
 
+
+        // Set Game winner
         if (oneWins > twoWins) {
             scoreBean.setGameWinner(playerBean.getFirstPlayer());
         } else if (oneWins < twoWins) {

@@ -14,6 +14,7 @@ public class RockPaperScissorsApiController {
     MoveBean moveBean;
     ScoreBean scoreBean = new ScoreBean();
 
+
     // Set player name and single or multi play
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String start(String firstPlayer, String secondPlayer) {
@@ -32,7 +33,6 @@ public class RockPaperScissorsApiController {
     }
 
 
-
     // Get move in single play
     @RequestMapping(value = "/start/single-play", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String singlePlay(String move) {
@@ -44,7 +44,6 @@ public class RockPaperScissorsApiController {
         return String.format(pattern, scoreBean.getRound(), playerBean.getFirstPlayer(), moveBean.getFirstPlayerMove(),
                 playerBean.getSecondPlayer(), moveBean.getSecondPlayerMove(), scoreBean.getMatchWinner());
     }
-
 
 
     // Get moves in multi play
@@ -60,11 +59,14 @@ public class RockPaperScissorsApiController {
                 playerBean.getSecondPlayer(), moveBean.getSecondPlayerMove(), scoreBean.getMatchWinner());
     }
 
+
     // Update game score
     private void updateGameScore() {
-        PlayOperator.setGameScore(moveBean, scoreBean, playerBean);
+        GameOperator.setGameScore(moveBean, scoreBean, playerBean);
     }
 
+
+    // Present game score
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getScoreBean() {
         String pattern = "{ \"round\":%s, \"firstPlayer\":{\"name\": \"%s\", \"wins\":%s}, \"secondPlayer\":{\"name\": \"%s\", \"wins\":%s}," +
