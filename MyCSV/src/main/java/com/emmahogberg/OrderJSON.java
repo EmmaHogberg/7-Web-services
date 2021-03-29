@@ -1,26 +1,32 @@
 package com.emmahogberg;
 
+
 import java.util.ArrayList;
 
-public class OrderJSON(ArrayList<ArrayList<String>> csvArrayList) {
-    ArrayList<String> stuff = new ArrayList<>();
+public class OrderJSON {
 
+    public static String printOrderInJSON() {
 
-    OrderBean order = null;
+        ArrayList<String> stuff = new ArrayList<>();
 
-    StringBuilder stringBuilder = new StringBuilder();
+        OrderBean order = null;
 
-		for (int i = 1; i < readCSV.getWholeSheet().size(); i++) {
+        StringBuilder stringBuilder = new StringBuilder();
 
-        order = new OrderBean(readCSV.getWholeSheet().get(i).get(1),
-                readCSV.getWholeSheet().get(i).get(2), readCSV.getWholeSheet().get(i).get(3),
-                readCSV.getWholeSheet().get(i).get(4), readCSV.getWholeSheet().get(i).get(5),
-                readCSV.getWholeSheet().get(i).get(6), readCSV.getWholeSheet().get(i).get(7),
-                readCSV.getWholeSheet().get(i).get(8));
+        for (int i = 1; i < readCSV.getWholeSheet().size(); i++) {
 
-        String pattern = "{ \"order\":%s {\"orderDate\":%s, \"region\":%s, \"rep1\":%s, \"rep2\":%s, \"item\":%s, \"units\":%s, \"unitCost\":%s, \"total\":%s},}";
-        stringBuilder.append(String.format(pattern, i, order.orderDate, order.region, order.rep1, order.rep2, order.item, order.units, order.unitCost, order.total));
+            order = new OrderBean(readCSV.getWholeSheet().get(i).get(1),
+                    readCSV.getWholeSheet().get(i).get(2), readCSV.getWholeSheet().get(i).get(3),
+                    readCSV.getWholeSheet().get(i).get(4), readCSV.getWholeSheet().get(i).get(5),
+                    readCSV.getWholeSheet().get(i).get(6), readCSV.getWholeSheet().get(i).get(7),
+                    readCSV.getWholeSheet().get(i).get(8));
+
+            String pattern = "{ \"order\":%s {\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
+                    "\"item\": \"%s\", \"units\":%s, \"unitCost\":%s, \"total\":%s},}";
+            stringBuilder.append(String.format(pattern, i, order.orderDate, order.region, order.rep1, order.rep2,
+                    order.item, order.units, order.unitCost, order.total));
+        }
+        return stringBuilder.toString();
     }
 
-		return stringBuilder.toString();
 }
