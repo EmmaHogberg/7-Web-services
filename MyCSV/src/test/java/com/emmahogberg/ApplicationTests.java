@@ -1,10 +1,10 @@
-package com.emmahogberg.YourCVS;
+package com.emmahogberg;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class YourCvsApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

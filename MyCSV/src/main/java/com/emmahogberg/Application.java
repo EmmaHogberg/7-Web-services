@@ -1,13 +1,13 @@
-package com.emmahogberg.YourCVS;
+package com.emmahogberg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class YourCvsApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(YourCvsApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
