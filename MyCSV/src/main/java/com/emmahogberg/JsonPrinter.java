@@ -17,11 +17,7 @@ public class JsonPrinter {
 
         for (OrderBean order : orderBeans) {
 
-            String pattern = "{\"order\":{\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
-                    "\"item\": \"%s\", \"units\":%s, \"unitCost\":%s, \"total\":%s}},";
-
-            stringBuilder.append(String.format(pattern, order.orderDate, order.region, order.rep1, order.rep2,
-                    order.item, order.units, order.unitCost, order.total));
+            stringBuilder.append(formatOrderToJson(order));
         }
         // Remove last comma
         stringBuilder.deleteCharAt(stringBuilder.length()-1);
@@ -29,6 +25,43 @@ public class JsonPrinter {
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
+
+    // Method to print all errors of the whole order as a Json
+    public static String printErrors(ArrayList<OrderBean> orderBeans) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+
+        for (OrderBean order : orderBeans) {
+
+            BigDecimal units = new BigDecimal(order.getUnits());
+            BigDecimal unitCost = new BigDecimal(order.getUnitCost());
+            BigDecimal total = new BigDecimal(order.getTotal());
+
+            if (!units.multiply(unitCost).equals(total)) {
+
+                stringBuilder.append(formatOrderToJson(order));
+            }
+        }
+        // Remove last comma
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+
+
+    // Pattern to print Json
+    private static String formatOrderToJson(OrderBean order) {
+        String pattern = "{\"order\":{\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
+                "\"item\": \"%s\", \"units\":%s, \"unitCost\":%s, \"total\":%s}},";
+
+        return String.format(pattern, order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
+                order.getItem(), order.getUnits(), order.getUnitCost(), order.getTotal());
+    }
+
+
 
 
     // Method to print one column of the order as a Json
@@ -42,35 +75,35 @@ public class JsonPrinter {
 
             switch (column) {
                 case "orderDate":
-                    value = order.orderDate;
+                    value = order.getOrderDate();
                     break;
 
                 case "region":
-                    value = order.region;
+                    value = order.getRegion();
                     break;
 
                 case "rep1":
-                    value = order.rep1;
+                    value = order.getRep1();
                     break;
 
                 case "rep2":
-                    value = order.rep2;
+                    value = order.getRep2();
                     break;
 
                 case "item":
-                    value = order.item;
+                    value = order.getItem();
                     break;
 
                 case "units":
-                    value = order.units;
+                    value = order.getUnits();
                     break;
 
                 case "unitCost":
-                    value = order.unitCost;
+                    value = order.getUnitCost();
                     break;
 
                 case "total":
-                    value = order.total;
+                    value = order.getTotal();
                     break;
 
                 default:
@@ -86,45 +119,4 @@ public class JsonPrinter {
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
-
-
-
-
-    // Method to print all errors of the whole order as a Json
-    public static String printErrors(ArrayList<OrderBean> orderBeans) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-
-        for (OrderBean order : orderBeans) {
-
-            BigDecimal units = new BigDecimal(order.units);
-            BigDecimal unitCost = new BigDecimal(order.unitCost);
-            BigDecimal total = new BigDecimal(order.total);
-
-            if (!units.multiply(unitCost).equals(total)) {
-
-                String pattern = "{\"order\":{\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", " +
-                        "\"rep2\": \"%s\", \"item\": \"%s\", \"units\":%s, \"unitCost\":%s, \"total\":%s}},";
-
-                stringBuilder.append(String.format(pattern, order.orderDate, order.region, order.rep1,
-                        order.rep2, order.item, order.units, order.unitCost, order.total));
-            }
-        }
-        // Remove last comma
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
-
-        stringBuilder.append("]");
-        return stringBuilder.toString();
-    }
-
-
-
-
-//
-//    private static String patternPrinter() {
-//
-//
-//
-//    }
 }
