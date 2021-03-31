@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CsvController {
 
+
+
 	@RequestMapping(value = "/showCSV", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public void showCSV(HttpServletResponse response) throws IOException {
 
@@ -31,7 +33,7 @@ public class CsvController {
 
 		ArrayList<String> SimpleCsv= new ArrayList<String>();
 		
-		for (ArrayList<String> row : readCSV.getWholeSheet()) {
+		for (ArrayList<String> row : ReadCSV.getWholeSheet()) {
 			
 			SimpleCsv.addAll(row);
 		}
@@ -43,7 +45,7 @@ public class CsvController {
 
 		ArrayList<String> SimpleCsv= new ArrayList<String>();
 		
-		for (ArrayList<String> row : readCSV.getWholeSheet()) {
+		for (ArrayList<String> row : ReadCSV.getWholeSheet()) {
 			
 			SimpleCsv.addAll(row);
 		}
@@ -51,10 +53,30 @@ public class CsvController {
 
 	}
 
-	@RequestMapping(value = "/showCSVstuff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String showCSVstuff() {
+	@RequestMapping(value = "/CsvToJSON", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String CsvToJSON() {
 
-		return OrderJSON.printOrderInJSON();
+		return JsonPrinter.printWholeOrder(OrderLoader.getAllOrders());
 	}
 
+	@RequestMapping(value = "/showColumn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String showColumn(String column) {
+
+		ArrayList<OrderBean> orderBeans = OrderLoader.getAllOrders();
+
+
+		return JsonPrinter.printColumn(column, orderBeans);
+
+
+	}
+
+	@RequestMapping(value = "/showErrors", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String showErrors() {
+
+
+
+		return JsonPrinter.printErrors(OrderLoader.getAllOrders());
+
+
+	}
 }

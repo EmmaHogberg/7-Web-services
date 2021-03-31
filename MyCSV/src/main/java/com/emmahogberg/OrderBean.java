@@ -21,6 +21,4 @@ public class OrderBean {
         this.unitCost = unitCost;
         this.total = total;
     }
-
-
 }

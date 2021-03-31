@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.springframework.core.io.ClassPathResource;
 
-public class readCSV {
+public class ReadCSV {
 
 	private static String COMMA_DELIMITER = ",";
 
