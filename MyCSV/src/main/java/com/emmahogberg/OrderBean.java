@@ -1,7 +1,5 @@
 package com.emmahogberg;
 
-import java.util.Comparator;
-
 public class OrderBean {
 
     private String orderDate;
@@ -9,12 +7,12 @@ public class OrderBean {
     private String rep1;
     private String rep2;
     private String item;
-    private String units;
-    private String unitCost;
-    private String total;
+    private Double units;
+    private Double unitCost;
+    private Double total;
 
 
-    public OrderBean(String orderDate, String region, String rep1, String rep2, String item, String units, String unitCost, String total) {
+    public OrderBean(String orderDate, String region, String rep1, String rep2, String item, Double units, Double unitCost, Double total) {
         this.orderDate = orderDate;
         this.region = region;
         this.rep1 = rep1;
@@ -48,15 +46,15 @@ public class OrderBean {
         return item;
     }
 
-    public String getUnits() {
+    public Double getUnits() {
         return units;
     }
 
-    public String getUnitCost() {
+    public Double getUnitCost() {
         return unitCost;
     }
 
-    public String getTotal() {
+    public Double getTotal() {
         return total;
     }
 }

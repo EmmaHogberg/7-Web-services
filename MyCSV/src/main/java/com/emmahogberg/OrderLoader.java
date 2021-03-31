@@ -2,6 +2,7 @@ package com.emmahogberg;
 
 import java.util.ArrayList;
 
+
 public class OrderLoader {
 
     private static final ArrayList<OrderBean> orderBeans = new ArrayList<>();
@@ -25,8 +26,8 @@ public class OrderLoader {
             OrderBean order = new OrderBean(ReadCSV.getWholeSheet().get(i).get(1),
                     ReadCSV.getWholeSheet().get(i).get(2), ReadCSV.getWholeSheet().get(i).get(3),
                     ReadCSV.getWholeSheet().get(i).get(4), ReadCSV.getWholeSheet().get(i).get(5),
-                    ReadCSV.getWholeSheet().get(i).get(6), ReadCSV.getWholeSheet().get(i).get(7),
-                    ReadCSV.getWholeSheet().get(i).get(8));
+                    Double.parseDouble(ReadCSV.getWholeSheet().get(i).get(6)), Double.parseDouble(ReadCSV.getWholeSheet().get(i).get(7)),
+                    Double.parseDouble(ReadCSV.getWholeSheet().get(i).get(8)));
 
             orderBeans.add(order);
         }

@@ -2,10 +2,10 @@ package com.emmahogberg;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class JsonPrinter {
-
 
 
 
@@ -34,12 +34,11 @@ public class JsonPrinter {
 
         for (OrderBean order : orderBeans) {
 
-            BigDecimal units = new BigDecimal(order.getUnits());
-            BigDecimal unitCost = new BigDecimal(order.getUnitCost());
-            BigDecimal total = new BigDecimal(order.getTotal());
+            BigDecimal units = BigDecimal.valueOf(order.getUnits());
+            BigDecimal unitCost = BigDecimal.valueOf(order.getUnitCost());
+            BigDecimal total = BigDecimal.valueOf(order.getTotal());
 
             if (!units.multiply(unitCost).equals(total)) {
-
                 stringBuilder.append(formatOrderToJson(order));
             }
         }
@@ -55,9 +54,9 @@ public class JsonPrinter {
     // Pattern to print Json
     private static String formatOrderToJson(OrderBean order) {
         String pattern = "{\"order\":{\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
-                "\"item\": \"%s\", \"units\":%s, \"unitCost\":%s, \"total\":%s}},";
+                "\"item\": \"%s\", \"units\":%.2f, \"unitCost\":%.2f, \"total\":%.2f}},";
 
-        return String.format(pattern, order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
+        return String.format(Locale.ENGLISH, pattern, order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
                 order.getItem(), order.getUnits(), order.getUnitCost(), order.getTotal());
     }
 
@@ -95,15 +94,15 @@ public class JsonPrinter {
                     break;
 
                 case "units":
-                    value = order.getUnits();
+                    value = order.getUnits().toString();
                     break;
 
                 case "unitCost":
-                    value = order.getUnitCost();
+                    value = order.getUnitCost().toString();
                     break;
 
                 case "total":
-                    value = order.getTotal();
+                    value = order.getTotal().toString();
                     break;
 
                 default:

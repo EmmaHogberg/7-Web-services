@@ -1,15 +1,11 @@
 package com.emmahogberg;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 
 
@@ -101,7 +97,5 @@ public class CsvController {
 	public String showErrors() {
 
 		return JsonPrinter.printErrors(OrderLoader.getAllOrders());
-
-
 	}
 }
