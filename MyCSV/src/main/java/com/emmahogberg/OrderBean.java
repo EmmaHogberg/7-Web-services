@@ -1,11 +1,12 @@
 package com.emmahogberg;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class OrderBean {
 
     private final Integer orderId;
-    private final String orderDate;
+    private final Date orderDate;
     private final String region;
     private final String rep1;
     private final String rep2;
@@ -15,7 +16,7 @@ public class OrderBean {
     private final BigDecimal total;
 
 
-    public OrderBean(Integer orderId, String orderDate, String region, String rep1, String rep2, String item, BigDecimal units, BigDecimal unitCost, BigDecimal total) {
+    public OrderBean(Integer orderId, Date orderDate, String region, String rep1, String rep2, String item, BigDecimal units, BigDecimal unitCost, BigDecimal total) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.region = region;
@@ -32,7 +33,7 @@ public class OrderBean {
         return orderId;
     }
 
-    public String getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 

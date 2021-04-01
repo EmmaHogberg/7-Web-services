@@ -1,5 +1,6 @@
 package com.emmahogberg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -44,13 +45,21 @@ public class JsonPrinter {
         return stringBuilder.toString();
     }
 
+    // Format orderDate
+    private static String formatOrderDate(OrderBean order) {
+        SimpleDateFormat orderDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        return orderDateFormatter.format(order.getOrderDate());
+    }
+
 
     // Pattern to print Json
     private static String formatOrderToJson(OrderBean order) {
         String pattern = "{\"order\":{\"orderId\": %s,\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
                 "\"item\": \"%s\", \"units\":%.2f, \"unitCost\":%.2f, \"total\":%.2f}},";
 
-        return String.format(Locale.ENGLISH, pattern,order.getOrderId(), order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
+        String orderDate = formatOrderDate(order);
+
+        return String.format(Locale.ENGLISH, pattern,order.getOrderId(), orderDate, order.getRegion(), order.getRep1(), order.getRep2(),
                 order.getItem(), order.getUnits(), order.getUnitCost(), order.getTotal());
     }
 
@@ -70,7 +79,7 @@ public class JsonPrinter {
                     break;
 
                 case "orderDate":
-                    value = order.getOrderDate().toString();
+                    value = formatOrderDate(order);;
                     break;
 
                 case "region":
