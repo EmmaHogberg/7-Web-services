@@ -12,9 +12,15 @@ public class Sorter {
         this.orderBeans = orderBeans;
     }
 
+
+    // Sort by the selected column value
     public ArrayList<OrderBean> sortBy(String column) {
 
         switch (column) {
+            case "orderId":
+                orderBeans.sort(Comparator.comparing(OrderBean::getOrderId));
+                break;
+
             case "orderDate":
                 orderBeans.sort(Comparator.comparing(OrderBean::getOrderDate));
                 break;

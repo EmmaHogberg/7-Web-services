@@ -1,12 +1,10 @@
 package com.emmahogberg;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Locale;
 
 
 public class JsonPrinter {
-
 
 
     // Method to print the whole order as a Json
@@ -26,6 +24,7 @@ public class JsonPrinter {
         return stringBuilder.toString();
     }
 
+
     // Method to print all errors of the whole order as a Json
     public static String printErrors(ArrayList<OrderBean> orderBeans) {
 
@@ -34,11 +33,7 @@ public class JsonPrinter {
 
         for (OrderBean order : orderBeans) {
 
-            BigDecimal units = BigDecimal.valueOf(order.getUnits());
-            BigDecimal unitCost = BigDecimal.valueOf(order.getUnitCost());
-            BigDecimal total = BigDecimal.valueOf(order.getTotal());
-
-            if (!units.multiply(unitCost).equals(total)) {
+            if (order.getUnits().multiply(order.getUnitCost()).compareTo(order.getTotal()) != 0) {
                 stringBuilder.append(formatOrderToJson(order));
             }
         }
@@ -50,17 +45,14 @@ public class JsonPrinter {
     }
 
 
-
     // Pattern to print Json
     private static String formatOrderToJson(OrderBean order) {
-        String pattern = "{\"order\":{\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
+        String pattern = "{\"order\":{\"orderId\": %s,\"orderDate\": \"%s\", \"region\": \"%s\", \"rep1\": \"%s\", \"rep2\": \"%s\", " +
                 "\"item\": \"%s\", \"units\":%.2f, \"unitCost\":%.2f, \"total\":%.2f}},";
 
-        return String.format(Locale.ENGLISH, pattern, order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
+        return String.format(Locale.ENGLISH, pattern,order.getOrderId(), order.getOrderDate(), order.getRegion(), order.getRep1(), order.getRep2(),
                 order.getItem(), order.getUnits(), order.getUnitCost(), order.getTotal());
     }
-
-
 
 
     // Method to print one column of the order as a Json
@@ -70,11 +62,15 @@ public class JsonPrinter {
 
         for (OrderBean order : orderBeans) {
 
-            String value = "";
+            String value;
 
             switch (column) {
+                case "orderId":
+                    value = order.getOrderId().toString();
+                    break;
+
                 case "orderDate":
-                    value = order.getOrderDate();
+                    value = order.getOrderDate().toString();
                     break;
 
                 case "region":
@@ -109,8 +105,8 @@ public class JsonPrinter {
                     throw new IllegalStateException("Unexpected value: " + column);
             }
 
-            String pattern = "{\"order\":{\"%s\": \"%s\"}},";
-            stringBuilder.append(String.format(pattern, column, value));
+            String pattern = "{\"order\":{\"orderId\": %s, \"%s\": \"%s\"}},";
+            stringBuilder.append(String.format(pattern, order.getOrderId(), column, value));
         }
         // Remove last comma
         stringBuilder.deleteCharAt(stringBuilder.length()-1);

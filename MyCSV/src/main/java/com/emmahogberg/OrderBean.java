@@ -1,18 +1,22 @@
 package com.emmahogberg;
 
+import java.math.BigDecimal;
+
 public class OrderBean {
 
-    private String orderDate;
-    private String region;
-    private String rep1;
-    private String rep2;
-    private String item;
-    private Double units;
-    private Double unitCost;
-    private Double total;
+    private final Integer orderId;
+    private final String orderDate;
+    private final String region;
+    private final String rep1;
+    private final String rep2;
+    private final String item;
+    private final BigDecimal units;
+    private final BigDecimal unitCost;
+    private final BigDecimal total;
 
 
-    public OrderBean(String orderDate, String region, String rep1, String rep2, String item, Double units, Double unitCost, Double total) {
+    public OrderBean(Integer orderId, String orderDate, String region, String rep1, String rep2, String item, BigDecimal units, BigDecimal unitCost, BigDecimal total) {
+        this.orderId = orderId;
         this.orderDate = orderDate;
         this.region = region;
         this.rep1 = rep1;
@@ -24,7 +28,9 @@ public class OrderBean {
     }
 
 
-
+    public Integer getOrderId() {
+        return orderId;
+    }
 
     public String getOrderDate() {
         return orderDate;
@@ -46,15 +52,15 @@ public class OrderBean {
         return item;
     }
 
-    public Double getUnits() {
+    public BigDecimal getUnits() {
         return units;
     }
 
-    public Double getUnitCost() {
+    public BigDecimal getUnitCost() {
         return unitCost;
     }
 
-    public Double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 }
