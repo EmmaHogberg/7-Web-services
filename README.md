@@ -1,4 +1,4 @@
-# 7-Web-services
+# Web-services
 All of the assignments in the course Web services
 
 ## I uppgift 1: 
